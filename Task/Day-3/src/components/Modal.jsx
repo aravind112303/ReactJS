@@ -1,15 +1,20 @@
 import ReactDom from "react-dom";
 
-function Modal({message}) {
+function Modal({message , first, setfirst}) {
     
     return ReactDom.createPortal (
         <>
-        <div className="flex m-20 p-20  fixed items-center">
-            <div className=" rounded-2xl bg-black text-white p-10 items-center flex">{message}
-                <button className="bg-blue-400 white p-5 justify-items-center flex m-10 rounded-full text-white ">Close</button>
-            </div>
-        
-        </div>
+        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black">
+  <div className="bg-white text-black p-10 rounded-2xl flex flex-col items-center">
+    {message}
+    <button className="mt-4 px-4 py-2 rounded-full bg-blue-500 text-white" onClick={() => {
+      setfirst(!first)
+    }}>
+      Close
+    </button>
+  </div>
+</div>
+
         </>
         ,document.getElementById("modal-root")
     )

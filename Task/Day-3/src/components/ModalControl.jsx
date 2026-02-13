@@ -7,7 +7,7 @@ const ModalControl = () => {
      <button className="px-10 py-5 m-10 bg-amber-950 text-white rounded-full" onClick={() => {
       setfirst(!first)
      }}>{first ? "Hide": "show"}</button>
-      {first && <Modal message={"Hello Popup"} />}
+      {first && <Modal message={"Hello Popup"} first={first} setfirst={setfirst} />}
    
     </div>
   )

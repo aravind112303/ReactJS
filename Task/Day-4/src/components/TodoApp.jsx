@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useReducer } from 'react';
 import { useTodo } from './useTodo';
+import FilterTodo from './FilterTodo';
 
 
 
@@ -14,8 +15,7 @@ const TodoApp = () => {
      
     })
     
-    const filteredTodos = useMemo(() => {
-      console.log("filtering users");
+    const filteredTodos = useCallback(() => {
       return todos.filter((todo) => {
         if(fil === "completed") {
           return todo.completed
@@ -24,7 +24,7 @@ const TodoApp = () => {
         } 
         return todos;
       })
-    }, [fil])
+    },[fil])
   
 
     const addTodo = () => {
@@ -50,18 +50,11 @@ const TodoApp = () => {
 
         <div className='gap-2'>
           <h2 className='bg-amber-200 mt-10'>Todo List</h2>
+           <FilterTodo filteredTodos={filteredTodos}/>
           <button className='bg-gray-400 px-2 rounded' onClick={ () => setFil("all")}>ALL</button>
           <button className='bg-green-400 px-2 rounded' onClick={ () => setFil("completed")}>Completed</button>
           <button className='bg-red-400 px-2 rounded' onClick={ () => setFil("pending")}>Pending</button>
-
-
-        <ul>
-          {filteredTodos.map((todo) => {
-           return <li key={todo.id}>{todo.text} - {todo.completed ? "✅":"❌"}</li>
-          })}
-        </ul>
         </div>
-      
     </div>
   )
 }

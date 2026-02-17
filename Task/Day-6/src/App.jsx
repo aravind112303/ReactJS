@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { clearCart, decreaseQuantity, increaseQuantity, removeItem } from './features/cart/cartSlice';
+import { addItem, clearCart, decreaseQuantity, increaseQuantity, removeItem } from './features/cart/cartSlice';
 
 const App = () => {
   const items = useSelector((state) => state.cart.items);
@@ -20,8 +20,16 @@ const App = () => {
           </li>
         }))}
       </ul>
-      <p>Total Amount {totalAmount}</p>
-      <button>Add Item</button>
+      <p>Total Amount : ${totalAmount}</p>
+      <button onClick={()=> { 
+        const obj = {
+          id : Number(prompt("Enter id: ")),
+          name : prompt("Enter Product name: "),
+          price : Number(prompt("Enter product price:")),
+          quantity : 1
+        }
+        dispatch(addItem(obj))
+      }}>Add Item</button>
       <button onClick={() => dispatch(clearCart())}>Delete Cart</button>
     </div>
   )
